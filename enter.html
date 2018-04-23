@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>SS</title>
+		<link rel="stylesheet" type="text/css" href="sass/new_file.css"/>
+	</head>
+	<body>
+		<header>
+			LOGO
+		</header>
+             		
+		<div class="container">
+			<form>
+		<img src="img/dllogo.png"/>	
+			<p id="login">
+			Login Into Your Account
+			</p>
+		<input type="text" placeholder="User name" class="impt"/>		
+		<input type="password" placeholder="Pass word" class="pass"/>
+		<span id="sp1"></span>
+		<input type="submit" value="Sign In" class="sub">
+		<input type="checkbox" id="cookee"/><span class="Rem">Remember 7</span>
+		</form>
+		</div>
+	</body>
+	<script src="js/jquery-2.1.4.min.js"></script>
+	<script src="js/jquery.cookie.js"></script>
+	<script>
+	
+		
+		////用户名正则，4到10位（字母，数字，下划线，减号）
+		var reg1=/^[a-zA-Z0-9_-]{4,16}$/;
+
+		  var reg2 = /^[0-9A-Za-z]{1,10}$/
+		  var s;
+		  var y;
+		   $(".impt").blur(function(){
+		   			var impt = $(".impt").val();
+		   	if(reg1.test(impt)){		   		  
+		   		   $(".impt").css({"color":"grey"});
+		   		   s=true;
+		   	}else{
+  	              $("#red_impt").text("User format error").css("color", "red"); 
+  	              s=false;
+		   	}
+		
+		   })
+		      $(".pass").blur(function(){
+		   			var pass = $(".pass").val();
+		   	if(reg2.test(pass)){		   		  
+		   		    $(".pass").css({"color":"grey"});
+		   		    y=true;
+		   	}else{
+  	              $(".pass").text("Word format error").css("color", "red");  
+  	              y=false;
+		   	}
+		
+		   })
+		      
+		    
+if($.cookie("username")){
+	$(".impt").val($.cookie("username"));
+	$(".pass").val($.cookie("pass"));
+	$("#cookee").attr("checked",true)
+}
+	$(".impt").val(sessionStorage.getItem('username'));
+	$(".pass").val(sessionStorage.getItem('password'));	
+   	
+var cookeename;
+$("#cookee").change(function(){
+	cookeename=$(this).prop("checked")
+	$.cookie("username",$('.impt').val(sessionStorage.getItem('username')),{expires:7})
+    $.cookie("pass",$('.pass').val(sessionStorage.getItem('password')),{expires:7})
+})
+$(".sub").click(function(){
+	//表单验证成功	
+		 $.ajax({
+		      	type:"post",
+		      	url:"http://47.92.37.168/luntai/php/index.php?C=Login&M=login",
+		      	async:true,
+		      	dataType:'json',
+		      	data:{
+		      		username:$(".impt").val(),
+		      		password:$(".pass").val()
+		      	},
+		      	success:function(data){
+		      		console.log(data)
+		      		if(data.code==200){
+		      			localStorage.setItem("name",$(".impt").val())		      			
+                location.href="index.html"
+		      		}else{
+		      			$("#sp1").html("Number is not registered")
+		      			$("#sp1").css({"color":"red"})
+		      
+		      		}
+		      	},
+		      	error:function(){
+		      		$("#sp1").html("Number is not registered")
+		      			$("#sp1").css({"color":"red"})
+		      			  
+		      	}
+		      
+		      })
+
+	 
+
+	return false	
+})
+	</script>
+</html>

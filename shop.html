@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="sass/new_file.css" />
+		<style>.numb {
+	width: 100px;
+}
+
+.add {
+	padding: 5px 30px;
+	background: #ffdc4e;
+	border: 0;
+	border-radius: 2px;
+}
+
+.table-striped2 {
+	color: darkgray;
+}
+
+.olt,
+.olt2 {
+	display: flex;
+	align-items: center;
+	width: 80%;
+	justify-content: space-between;
+	margin: 10px auto;
+	color: darkgray;
+}
+
+.olt li,
+.olt2 li {
+	width: 15%;
+	padding: 5px 10px;
+}
+
+.newTr td {
+	padding: 10px 0;
+}
+
+.newTr td:nth-of-type(2),
+.newTr td:nth-of-type(3),
+.newTr td:nth-of-type(4),
+.newTr td:nth-of-type(5) {
+	text-align: center;
+}</style>
+	</head>
+	<script>if(!localStorage.name) {
+	alert("请先登录")
+	location.href = "enter.html"
+}</script>
+
+	<body style="background: white;">
+		<div class="header1">
+			<p class="HEAD_P">
+				<a href="/spider GT/register.html">LOGO</a>
+			</p>
+			<ol class="header_ol">
+				<li class="ho">HOME</li>
+				<li class="ho">PPODUCTS</li>
+				<li class="ho">ABOUT US</li>
+				<li class="ho">CONTACT</li>
+				<li class="ho">
+					<a href="/spider GT/enter.html">REGISTERI SINF IN</a>
+				</li>
+			</ol>
+		</div>
+		<section class="tab2_sect">
+			<span>Your location: Products ></span><span>Products</span>
+		</section>
+		<p class="Hed">Account information</p>
+		<table class="table-striped2" cellspacing="0" cellpadding="0">
+			<tr>
+				<th>Date</th>
+				<th>Your price Inc GST</th>
+				<th>Discount price</th>
+				<th>Stock Qty</th>
+				<th>Add Qty</th>
+				<th>Qty In Cart</th>
+				<th>remove</th>
+			</tr>
+		</table>
+		<ol class="olt">
+			<li>Order Subtotal</li>
+			<li></li>
+		</ol>
+		<ol class="olt2">
+			<li>Total</li>
+			<li></li>
+		</ol>
+		<p class="Hed">Account information</p>
+		<ol class="in">
+			<li><input type="text" placeholder="Name" class="names"/><img src="轮胎切图/官网首页切图/Usercopy2.png" /></li>
+			<li><input type="text" placeholder="Phone code" class="phone"/><img src="img/矢量智能对象 (2).png" /></li>
+		</ol>
+		<p class="shop_p"><input type="txet" placeholder="Address" class="address" /><img src="轮胎切图/官网首页切图/Mail.png" /></p>
+		<textarea placeholder="Remark..." class="Shop_text"></textarea>
+
+		<div class="fool_input">
+			<input type="submit" value="Checkout" id="checkout" />
+			<a href="/spider GT/index.html" id="shopp" style="display: inline-block;"> SHOPPING</a>
+		</div>
+	</body>
+	<script src="js/jquery-2.1.4.min.js"></script>
+	<script>
+		if(localStorage.getItem("name")) {
+			$.ajax({
+				type: "post",
+				url: "http://47.92.37.168/luntai/php/index.php?C=Login&M=find_car",
+				async: true,
+				dataType: "json",
+				data: {
+					username: localStorage.name
+				},
+				success: function(data) {
+					if(data.code == 200) {
+						console.log(data.data)
+						var jsb = data.data
+						var newtr = ""
+						var sd = 0;
+						for(var i = 0; i < jsb.length-1; i++) {
+							//console.log(jsb)					
+							newtr += "<tr class='newTr'>" +
+								"<td>" +
+								"<span>" + jsb[i].brand + " " + "</span>" +
+								"<span>" + jsb[i].size + " " + "</span>" +
+								"<span>" + jsb[i].pattern + " " + "</span>" +
+								"<span>" + jsb[i].loading_index + " " + "</span>" +
+								"<span>" + jsb[i].tread_depth + "</span>" +
+								"<span>" + jsb[i].speed_rating + "</span>" +
+								"<span style='display:none;' class='id'>" + jsb[i].product_id + "</span>" +
+								"</td>" +
+								"<td>" + jsb[i].price + "</td>" +
+								"<td>" + jsb[i].qty + "</td>" +
+								"<td><input type='number' class='numb' value='" + jsb[jsb.length - 1][i].count + "'/></td>" +
+								"<td><button class='add'>Add</button></td>" +
+								"<td style='text-align: center;'><img src='img/sss.png'/></td>" +
+								"<td style='text-align: center;'>"+jsb[jsb.length - 1][i].count+"</td>"+
+								"</tr>"
+                          var nt=jsb[jsb.length - 1][i].count
+                           sd += Number(nt)					
+					
+				}
+						$(".olt li:eq(1)").html(sd)
+							$(".table-striped2 .newTr:odd").css("background","gainsboro")
+						$(".table-striped2").append(newtr)
+							$(".add").click(function(){
+						var s=$(this).parent().next().text()
+						var d=$(this).parent().prev().val()
+						s=d
+					})
+				}
+			}			
+		})
+		}
+$("#checkout").click(function(){
+	if(!localStorage.getItem("name")){
+		alert("请先登录")
+		location.href = "enter.html"
+	}else{
+		if($(".names").val("")&&$(".phone").val("")&&$(".Shop_text").val("")){
+			alert("请填写信息")
+		}else{
+			$.ajax({
+				type:"post",
+				url:"http://172.16.129.67:8888/luntai/php/index.php?C=Login&M=find_order",
+				async:true
+			});
+			location.href = "lishi.html"
+		}
+	}
+})
+	</script>
+
+</html>

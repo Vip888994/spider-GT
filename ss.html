@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div>
+    <input type="text" id="txtName" />
+  </div>
+  <table>
+    <tr>
+      <td>学号</td>
+      <td>姓名</td>
+      <td>性别</td>
+      <td>专业</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>张三丰</td>
+      <td>男</td>
+      <td>计算机</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>郭大侠</td>
+      <td>男</td>
+      <td>计算机</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>令狐冲</td>
+      <td>男</td>
+      <td>计算机</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>张翠山</td>
+      <td>男</td>
+      <td>计算机</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>郭破虏</td>
+      <td>男</td>
+      <td>计算机</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>黄药师</td>
+      <td>男</td>
+      <td>计算机</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>黄蓉</td>
+      <td>男</td>
+      <td>计算机</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>萧峰</td>
+      <td>男</td>
+      <td>计算机</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>慕容博</td>
+      <td>男</td>
+      <td>计算机</td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>萧远山</td>
+      <td>男</td>
+      <td>计算机</td>
+    </tr>
+    <tr>
+      <td>11</td>
+      <td>慕容复</td>
+      <td>男</td>
+      <td>计算机</td>
+    </tr>
+  </table>
+<div class="ll"></div>
+
+		
+	</body>
+	<script src="js/jquery-2.1.4.min.js"></script>
+<script type="text/javascript">
+  
+    $().ready(function(){
+      $("#txtName").keyup(
+        function(){          
+         
+          var $d = $("table tr:gt(0)").filter(":contains('"+$.trim($("#txtName").val())+"')");
+        $(".ll").append($d)
+          
+          
+        }
+      )
+    })
+    //
+    
+    
+    		//
+//		if (localStorage.username_) {
+//			$(".login").html("");
+//			$(".login").addClass('glyphicon glyphicon-user').prop("href","history.html");
+//			$(".off").css("display","block");
+//		}
+//		$('.off').click(function(){
+//			localStorage.removeItem("username_");
+//		})
+//		$('#tiao').click(function() {
+//			location.href = "products.html";
+//		})
+//		var showList = JSON.parse(localStorage.getItem("data"));
+//
+//	function showData(){
+//		$('#box').empty();
+//		var html='';
+//		for (var i = 0; i < showList.length; i++) {
+//			// if(showList[i].show!=false){
+//				html+= '<ul style="height: 58px;font-size: 12px;color: #a4a9ae;" class="list">'+
+//						'<li class="td1">'+
+//							'<span>' +showList[i].brand+ '</span>'+
+//							'<span>' +showList[i].size+ '</span>'+
+//							'<span>' +showList[i].pattern+'/'+'</span>'+
+//							'<span>' +showList[i].ply+ '</span>'+
+//							'<span>' +showList[i].load_index+'/'+'</span>'+
+//							'<span>' +showList[i].speed+ '</span>'+
+//							'<span>' +showList[i].tread_depth+'</span>'+
+//						'</li>'+
+//						'<li class="td2">'+'<span>$'+showList[i].price+'</span>'+'</li>'+
+//						'<li class="td3">$'+(showList[i].price*localStorage.getItem('discount')/100).toFixed(2)+ '</li>'+
+//						'<li class="td4">'+showList[i].qty+'</li>'+
+//						'<li class="td5">'+
+//							'<div class="num">'+
+//							'<input type="number" min="0" class="sum" style="line-height: 24px;" value="'+showList[i].cont+'"}>'+
+//							'</div>'+
+//						'</li>'+
+//						'<li class="td6">'+'<p class="shu">'+showList[i].cont+'</p>'+'<p class="del" index="'+showList[i].product_id+'">'+'</p>'+'</li>'+'</ul>';
+//			}
+//		$('#box').append(html);
+//		$(".list:odd").css("background", "#F7F8FA");
+//		quantity(showList);
+//	}
+//		showData();
+//
+//		$(".sum").each(function(i, item) {
+//			$(this).change(function() {
+//				$(this).parent().parent().next(".td6").children(".shu").html($(this).val());
+//				var a = $(this).val();
+//				showList[i].cont = a;
+//				// showList[i].price= showList[i].price*localStorage.getItem('discount')/100;
+//				// console.log(showList[i].price)
+//				localStorage.data = JSON.stringify(showList);
+//				quantity(showList);
+//			})
+//		})
+//		$(".del").each(function(i, item) {
+//				$(this).click(function() {
+//					$(this).parent().parent().remove();
+//					showList = deleteArrFalse(showList,$(this).attr('index'));
+//					localStorage.data = JSON.stringify(showList);
+//					quantity(showList);
+//				})
+//			})
+//
+//		function deleteArrFalse(arr,id){
+//			console.log(id)
+//			for(var i=0;i<arr.length;i++){
+//				if(id==arr[i].product_id){
+//					arr.splice(i,1);
+//					i--;
+//				}
+//			}
+//			return arr;
+//		}
+//				
+//
+//		function quantity(n) {
+//			var num = 0;
+//			var sum = 0;
+//			for (var i = 0; i < n.length; i++) {
+//				// if(n[i].show){
+//					num += Number(n[i].cont);
+//					sum += n[i].cont * parseInt(n[i].price)*localStorage.getItem('discount')/100;
+//				// }				
+//			}
+//			$(".quantity").html(num);
+//			$(".prices").html('$' + sum.toFixed(2));
+//		}
+//	
+//		$("#submit").click(function() {
+//			if(!localStorage.getItem('username_')){
+//				alert('请登录');
+//			}else{
+//			var usename = localStorage.getItem("username_");
+//			if ($("#name").val() && $('#phone').val() && $('#address').val()) {
+//				var rem;
+//				if ($("#remarks") == '') {
+//					rem = "";
+//				} else {
+//					rem = $('#remarks').val();
+//				}
+//				$.ajax({
+//					type: "post",
+//					url: "../php/index.php?C=Login&M=check_out",
+//					async: true,
+//					dataType: "json",
+//					data: {
+//						discount:localStorage.getItem('discount'),
+//						username: usename,
+//						name:  escape($("#name").val()),
+//						phone: escape($('#phone').val()),
+//						address: escape($('#address').val()),
+//						remarks: escape(rem),
+//						products_id: JSON.stringify(showList)
+//					},
+//					success: function(data) {
+//					debugger;
+//							if(data[0].msg=='success'){
+//							
+//								localStorage.removeItem('data');
+//								location.href='history.html';
+//							}
+//					}
+//				});
+//				$(".tishi").html("Order submitted successfully").css("color", "green");
+//				$("#name").val("");
+//				$("#phone").val("");
+//				$("#address").val("");
+//				$("#remarks").val("");
+//			} else {
+//				$(".tishi").html("Please fill in complete information").css("color", "red")
+				// $("#name").val("");
+				// $("#phone").val("");
+				// $("#address").val("");
+				// $("#remarks").val("");
+  </script>
+</html>
